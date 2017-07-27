@@ -7,7 +7,6 @@ class Checkout
   end
 
   def scan(*item)
-    # @basket.push(item)
     item.each{|item| @basket.push(item)}
   end
 
