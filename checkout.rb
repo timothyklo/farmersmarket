@@ -6,8 +6,9 @@ class Checkout
     self.basket = []
   end
 
-  def scan(item)
-    @basket.push(item)
+  def scan(*item)
+    # @basket.push(item)
+    item.each{|item| @basket.push(item)}
   end
 
   def total
