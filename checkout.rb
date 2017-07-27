@@ -5,4 +5,8 @@ class Checkout
     self.basket = []
   end
 
+  def scan(item)
+    @basket.push(item)
+  end
+
 end
