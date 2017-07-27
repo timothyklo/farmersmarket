@@ -15,18 +15,17 @@ class Checkout
     @@prices[item] = discount
   end
 
-
   def initialize
-    self.basket = []
+    self.basket = Hash["CH1" => 0, "AP1" => 0, "CF1" => 0, "MK1" =>0]
   end
 
-  def scan(*item)
-    item.each{|item| @basket.push(item)}
+  def scan(item)
+    @basket[item] += 1
   end
 
   def total
     @total = 0
-    @basket.each {|x| @total += @@prices[x]}
+    @basket.each {|item, count| @total += @@prices[item]*count}
     @total
   end
 
