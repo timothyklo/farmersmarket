@@ -58,31 +58,31 @@ class CheckoutTest < Minitest::Test
     assert_equal 10.97, @co.total
   end
 
-  # def test_supplied_test_1
-  #   @co.scan("CH1")
-  #   @co.scan("AP1")
-  #   @co.scan("CF1")
-  #   @co.scan("MK1")
-  #   assert_equal 20.34, @co.total
-  # end
-  #
-  # def test_supplied_test_2
-  #   @co.scan("MK1")
-  #   @co.scan("AP1")
-  #   assert_equal 10.75, @co.total
-  # end
-  #
-  # def test_supplied_test_3
-  #   @co.scan("CF1")
-  #   @co.scan("CF1")
-  #   assert_equal 11.23, @co.total
-  # end
-  #
-  # def test_supplied_test_4
-  #   @co.scan("AP1")
-  #   @co.scan("AP1")
-  #   @co.scan("CH1")
-  #   @co.scan("AP1")
-  #   assert_equal 16.61, @co.total
-  # end
+  def test_supplied_test_1
+    @co.scan("CH1")
+    @co.scan("AP1")
+    @co.scan("CF1")
+    @co.scan("MK1")
+    assert_equal 20.34, @co.total
+  end
+
+  def test_supplied_test_2
+    @co.scan("MK1")
+    @co.scan("AP1")
+    assert_equal 10.75, @co.total
+  end
+
+  def test_supplied_test_3
+    @co.scan("CF1")
+    @co.scan("CF1")
+    assert_equal 11.23, @co.total
+  end
+
+  def test_supplied_test_4
+    @co.scan("AP1")
+    @co.scan("AP1")
+    @co.scan("CH1")
+    @co.scan("AP1")
+    assert_equal 16.61, @co.total
+  end
 end
