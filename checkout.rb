@@ -21,28 +21,30 @@ class Checkout
   def scan(item)
     case item
     when "CF1"
-      @basket.push("CF1")
       # BOGO -- Buy-One-Get-One-Free Special on Coffee. (Unlimited)
-      if (@basket.count { |carted| carted == "CF1"}) % 2 == 0
+      @basket.push("CF1")
+      if @basket.count("CF1") % 2 == 0
         @basket.push("BOGO")
       end
     when "AP1"
       # APPL -- If you buy 3 or more bags of Apples, the price drops to $4.50.
-      if (@basket.count { |carted1| carted1 == "AP1"}) < 2
+      if @basket.count("AP1") < 2
         @basket.push("AP1")
-      elsif (@basket.count { |carted1| carted1 == "AP1"}) == 2
+      elsif @basket.count("AP1") == 2
         @basket.insert(@basket.index("AP1") + 1, "APPL")
         @basket.insert(@basket.rindex("AP1") + 1, "APPL")
         @basket.push("AP1")
         @basket.push("APPL")
-      elsif (@basket.count { |carted1| carted1 == "AP1"}) > 2
+      else
         @basket.push("AP1")
         @basket.push("APPL")
       end
     when "CH1", "MK1"
-      @basket.push(item)
       # CHMK -- Purchase a box of Chai and get milk free. (Limit 1)
-      puts "Chai and Milk"
+      @basket.push(item)
+      if (@basket.count("CHMK") == 0) && (@basket.count("CH1") == 1) && (@basket.count("MK1") ==1)
+        @basket.push("CHMK")
+      end
     else
       puts "Item not found"
     end

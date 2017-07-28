@@ -49,14 +49,14 @@ class CheckoutTest < Minitest::Test
     assert_equal 18.00, @co.total
   end
 
-  # def test_special_CHMK_chai_milk_free
-  #   @co.scan("CH1")
-  #   @co.scan("MK1")
-  #   assert_equal 3.11, @co.total
-  #   @co.scan("MK1")
-  #   @co.scan("CH1")
-  #   assert_equal 10.97, @co.total
-  # end
+  def test_special_CHMK_chai_milk_free
+    @co.scan("CH1")
+    @co.scan("MK1")
+    assert_equal 3.11, @co.total
+    @co.scan("MK1")
+    @co.scan("CH1")
+    assert_equal 10.97, @co.total
+  end
 
   # def test_supplied_test_1
   #   @co.scan("CH1")
