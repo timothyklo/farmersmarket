@@ -20,16 +20,18 @@ class Checkout
 
   def scan(item)
     case item
+
     when "CF1"
-      # BOGO -- Buy-One-Get-One-Free Special on Coffee. (Unlimited)
       @basket.push("CF1")
+      # BOGO -- Buy-One-Get-One-Free Special on Coffee. (Unlimited)
       if @basket.count("CF1") % 2 == 0
         @basket.push("BOGO")
       end
+
     when "AP1"
-      # APPL -- If you buy 3 or more bags of Apples, the price drops to $4.50.
       if @basket.count("AP1") < 2
         @basket.push("AP1")
+        # APPL -- If you buy 3 or more bags of Apples, the price drops to $4.50.
       elsif @basket.count("AP1") == 2
         @basket.insert(@basket.index("AP1") + 1, "APPL")
         @basket.insert(@basket.rindex("AP1") + 1, "APPL")
@@ -39,12 +41,14 @@ class Checkout
         @basket.push("AP1")
         @basket.push("APPL")
       end
+
     when "CH1", "MK1"
-      # CHMK -- Purchase a box of Chai and get milk free. (Limit 1)
       @basket.push(item)
+      # CHMK -- Purchase a box of Chai and get milk free. (Limit 1)
       if (@basket.count("CHMK") == 0) && (@basket.count("CH1") == 1) && (@basket.count("MK1") ==1)
         @basket.push("CHMK")
       end
+
     else
       puts "Item not found"
     end
@@ -53,6 +57,8 @@ class Checkout
   def total
     @total = 0
     @basket.each {|x| @total += @@prices[x]}
+    # print @basket, " = ", @total.round(2)
+    # puts
     @total.round(2)
   end
 
