@@ -38,13 +38,17 @@ class CheckoutTest < Minitest::Test
     assert_equal 22.46, @co.total
   end
 
-  # def test_special_APPL_apple_price_drop
-  #   @co.scan("AP1")
-  #   @co.scan("AP1")
-  #   @co.scan("AP1")
-  #   assert_equal 4.50 * 3, @co.total
-  # end
-  #
+  def test_special_APPL_apple_price_drop
+    @co.scan("AP1")
+    assert_equal 6.00, @co.total
+    @co.scan("AP1")
+    assert_equal 12.00, @co.total
+    @co.scan("AP1")
+    assert_equal 13.50, @co.total
+    @co.scan("AP1")
+    assert_equal 18.00, @co.total
+  end
+
   # def test_special_CHMK_chai_milk_free
   #   @co.scan("CH1")
   #   @co.scan("MK1")

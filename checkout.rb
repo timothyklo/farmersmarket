@@ -10,7 +10,7 @@ class Checkout
   # CHMK -- Purchase a box of Chai and get milk free. (Limit 1)
   @@sales = Hash["BOGO" => -11.23, "APPL" => -1.50, "CHMK" => -4.75]
   # adds sales to prices hash
-    @@sales.each do |item, discount|
+  @@sales.each do |item, discount|
     @@prices[item] = discount
   end
 
@@ -19,18 +19,33 @@ class Checkout
   end
 
   def scan(item)
-    @basket.push(item)
-    # BOGO -- Buy-One-Get-One-Free Special on Coffee. (Unlimited)
-    if item == "CF1"
+    case item
+    when "CF1"
+      @basket.push("CF1")
+      # BOGO -- Buy-One-Get-One-Free Special on Coffee. (Unlimited)
       if (@basket.count { |carted| carted == "CF1"}) % 2 == 0
         @basket.push("BOGO")
       end
+    when "AP1"
+      # APPL -- If you buy 3 or more bags of Apples, the price drops to $4.50.
+      if (@basket.count { |carted1| carted1 == "AP1"}) < 2
+        @basket.push("AP1")
+      elsif (@basket.count { |carted1| carted1 == "AP1"}) == 2
+        @basket.insert(@basket.index("AP1") + 1, "APPL")
+        @basket.insert(@basket.rindex("AP1") + 1, "APPL")
+        @basket.push("AP1")
+        @basket.push("APPL")
+      elsif (@basket.count { |carted1| carted1 == "AP1"}) > 2
+        @basket.push("AP1")
+        @basket.push("APPL")
+      end
+    when "CH1", "MK1"
+      @basket.push(item)
+      # CHMK -- Purchase a box of Chai and get milk free. (Limit 1)
+      puts "Chai and Milk"
+    else
+      puts "Item not found"
     end
-
-    # APPL -- If you buy 3 or more bags of Apples, the price drops to $4.50.
-
-    # CHMK -- Purchase a box of Chai and get milk free. (Limit 1)
-
   end
 
   def total
