@@ -8,17 +8,23 @@ class CheckoutTest < Minitest::Test
   end
 
   def test_startup_of_register
-    assert_equal ({"CH1"=>0, "AP1"=>0, "CF1"=>0, "MK1"=>0}), @co.basket
+    assert_equal true, @co.basket.is_a?(Array)
+    assert_equal [], @co.basket
   end
 
-  def test_scanning_of_a_chai
+  def test_scanning_of_a_chai_or_two
     @co.scan("CH1")
-    assert_equal 1, @co.basket["CH1"]
+    assert_equal ["CH1"], @co.basket
+    @co.scan("CH1")
+    assert_equal ["CH1", "CH1"], @co.basket
+
   end
 
-  def test_total_of_a_chai
+  def test_total_of_a_chai_or_two
     @co.scan("CH1")
     assert_equal 3.11, @co.total
+    @co.scan("CH1")
+    assert_equal 6.22, @co.total
   end
 
   # def test_supplied_test_1

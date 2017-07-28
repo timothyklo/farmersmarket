@@ -100,5 +100,3 @@ We’re looking for the following things when reviewing your code:
 5. Completeness (Did you read all the way to here?)
 
 Please feel free to ask questions as they arise.
-# farmersmarket
-# farmersmarket

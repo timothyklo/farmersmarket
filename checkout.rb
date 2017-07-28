@@ -10,22 +10,17 @@ class Checkout
   # CHMK -- Purchase a box of Chai and get milk free. (Limit 1)
   @@sales = Hash["BOGO" => -11.23, "APPL" => -1.50, "CHMK" => -4.75]
 
-  # adds sales to prices hash
-  @@sales.each do |item, discount|
-    @@prices[item] = discount
-  end
-
   def initialize
-    self.basket = Hash["CH1" => 0, "AP1" => 0, "CF1" => 0, "MK1" =>0]
+    self.basket = Array.new
   end
 
   def scan(item)
-    @basket[item] += 1
+    @basket.push(item)
   end
 
   def total
     @total = 0
-    @basket.each {|item, count| @total += @@prices[item]*count}
+    @basket.each {|x| @total += @@prices[x]}
     @total
   end
 
